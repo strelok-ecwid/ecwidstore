@@ -55,7 +55,6 @@
         src="https://app.ecwid.com/script.js?6732144&data_platform=code&data_date=2021-06-10"
         charset="utf-8"
       ></script>
-
       <script
         data-cfasync="false"
         type="text/javascript"
@@ -88,6 +87,7 @@
       let haveGlass = false;
       let haveDoors = false;
       Ecwid.OnCartChanged.add(function (cart) {
+        console.log(cart)  
         haveHood = cart.items.findIndex((item, index) => {
           if (item.product.id === 365099640) {
             return true;
