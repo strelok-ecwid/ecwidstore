@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <img src="vaz.jpg" alt="машина" usemap="#map" id="car" />
+    <h1 id="done">Вы собрали автомобиль</h1>
+    <map name="map">
+      <area
+        shape="poly"
+        id="hood"
+        coords="393, 336, 472, 287, 580, 319, 503, 376"
+        onclick="setHood()"
+      />
+      <area
+        shape="poly"
+        id="wheel_1"
+        onclick="setWheel()"
+        coords="111, 339, 131, 353, 144, 377, 138, 406, 118, 416, 93, 404, 82, 382, 81, 357, 91, 345"
+      />
+      <area
+        shape="poly"
+        id="wheel_2"
+        onclick="setWheel()"
+        coords="413, 400, 438, 396, 455, 407, 472, 429, 473, 457, 461, 477, 435, 485, 404, 475, 392, 452, 388, 426, 399, 409"
+      />
+      <area
+        shape="poly"
+        id="light"
+        onclick="setLight()"
+        coords="514, 388, 545, 367, 537, 403, 511, 415"
+      />
+      <area
+        shape="poly"
+        id="glass"
+        onclick="setGlass()"
+        coords="335, 257, 409, 223, 453, 281, 366, 325"
+      />
+      <area
+        shape="poly"
+        id="doors"
+        onclick="setDoors()"
+        coords="161, 238, 317, 257, 355, 332, 350, 427, 161, 390, 140, 348, 115, 327, 113, 296, 145, 251"
+      />
+    </map>
+    <div class="ec-cart-widget"></div>
+    <div>
+      <script
+        data-cfasync="false"
+        type="text/javascript"
+        src="https://app.ecwid.com/script.js?6732144&data_platform=code&data_date=2021-06-10"
+        charset="utf-8"
+      ></script>
+
+      <script
+        data-cfasync="false"
+        type="text/javascript"
+        src="https://app.ecwid.com/script.js?6732144&data_platform=singleproduct_v2"
+        charset="utf-8"
+      ></script>
+      <script type="text/javascript">
+        xProduct();
+      </script>
+      <script
+        data-cfasync="false"
+        type="text/javascript"
+        src="https://app.ecwid.com/script.js?6732144&data_platform=singleproduct_v2"
+        charset="utf-8"
+      ></script>
+      <script type="text/javascript">
+        xProduct();
+      </script>
+      <script type="text/javascript">
+        Ecwid.init();
+      </script>
+    </div>
+    <script>
+      const car = document.getElementById("car");
+      const done = document.getElementById("done");
+      done.style.display = "none";
+      let haveHood = false;
+      let haveWheel = false;
+      let haveLight = false;
+      let haveGlass = false;
+      let haveDoors = false;
+      Ecwid.OnCartChanged.add(function (cart) {
+        haveHood = cart.items.findIndex((item, index) => {
+          if (item.product.id === 365099640) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        haveWheel = cart.items.findIndex((item, index) => {
+          if (item.product.id === 333999308) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        haveLight = cart.items.findIndex((item, index) => {
+          if (item.product.id === 348055491) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        haveGlass = cart.items.findIndex((item, index) => {
+          if (item.product.id === 333999307) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        haveDoors = cart.items.findIndex((item, index) => {
+          if (item.product.id === 346854246) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+      });
+
+      setHood = () => {
+        console.log("Капот", haveHood);
+        if (haveHood === -1) {
+          Ecwid.Cart.addProduct(365099640);
+        }
+      };
+      setWheel = () => {
+        console.log("Колесо", haveWheel);
+        if (haveWheel === -1) {
+          Ecwid.Cart.addProduct(333999308);
+        }
+      };
+      setLight = () => {
+        if (haveLight === -1) {
+          Ecwid.Cart.addProduct(348055491);
+        }
+      };
+      setGlass = () => {
+        if (haveGlass === -1) {
+          Ecwid.Cart.addProduct(333999307);
+        }
+      };
+      setDoors = () => {
+        if (haveDoors === -1) {
+          Ecwid.Cart.addProduct(346854246);
+        }
+      };
+      Ecwid.OnCartChanged.add(function (cart) {
+        if (cart.productsQuantity == 5) {
+          car.style.display = "none";
+          done.style.display = "block";
+        } else {
+          car.style.display = "block";
+          done.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
