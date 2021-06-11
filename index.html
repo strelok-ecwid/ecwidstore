@@ -48,7 +48,7 @@
       />
     </map>
     <div class="ec-cart-widget"></div>
-    <div>     
+    <div>
       <script
         data-cfasync="false"
         type="text/javascript"
@@ -57,22 +57,30 @@
       ></script>
       <script type="text/javascript">
         xProduct();
-      </script>      
+      </script>
       <script type="text/javascript">
         Ecwid.init();
       </script>
     </div>
     <script>
+      Ecwid.OnAPILoaded.add(function () {
+        const cart = document.getElementsByClassName("ec-minicart")[0];
+        let event = new Event("click", { bubbles: true });
+        cart.dispatchEvent(event);
+      });
       const car = document.getElementById("car");
       const done = document.getElementById("done");
+
+      console.log(Ecwid);
       done.style.display = "none";
       let haveHood = false;
       let haveWheel = false;
       let haveLight = false;
       let haveGlass = false;
       let haveDoors = false;
+
       Ecwid.OnCartChanged.add(function (cart) {
-        console.log(cart)  
+        console.log(cart);
         haveHood = cart.items.findIndex((item, index) => {
           if (item.product.id === 365099640) {
             return true;
